@@ -1,10 +1,57 @@
 /**app.wxss**/
+
+/*
+  normal: #696D76,
+  strong: #8A8F9B,
+  blue: #32cdff,
+  gray: #E1E2E3
+*/
+page {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+view, text {
+  box-sizing: border-box;
+  position: relative;
+}
+
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+  align-items: flex-start;
+  justify-content: flex-start;
   box-sizing: border-box;
 } 
+
+.section-title {
+  font-size: 40rpx;
+  color: #696D76;
+  padding: 16rpx 0;
+}
+
+.normal-text {
+  font-size: 36rpx;
+  color: #8A8F9B;
+}
+
+.btn-normal {
+  border-radius: 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+}
+
+.btn-small {
+  height: 56rpx;
+  margin: 0;
+  line-height: 56rpx;
+  font-size: 28rpx;
+}
+
+.button-border {
+  border: 2rpx #32cdff solid;
+  background-color: transparent;
+  color: #32cdff;
+}

@@ -1,0 +1,25 @@
+<!--pages/authenticate/authenticate.wxml-->
+<view class="authenticate-base">
+	<view class="login-section">
+		<input
+			id="adminName"
+			maxlength="11"
+			placeholder="请输入昵称"
+			bindinput="inputValueChange"
+			type="number"
+			value="{{adminName}}"
+			placeholder-style="color: rgba(0, 0, 0, 0.2);"
+		/>
+	</view>
+	<view class="login-section">
+		<input
+			id="password"
+			maxlength="30"
+			placeholder="请输入密码"
+			bindinput="inputValueChange"
+			type="password"
+			placeholder-style="color: rgba(0, 0, 0, 0.2);"
+		/>
+	</view>
+	<view class="authenticate-button-login" bindtap="onLoginPress">登录</view>
+</view>

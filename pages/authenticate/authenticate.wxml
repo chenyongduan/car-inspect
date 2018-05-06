@@ -6,7 +6,6 @@
 			maxlength="11"
 			placeholder="请输入昵称"
 			bindinput="inputValueChange"
-			type="number"
 			value="{{adminName}}"
 			placeholder-style="color: rgba(0, 0, 0, 0.2);"
 		/>

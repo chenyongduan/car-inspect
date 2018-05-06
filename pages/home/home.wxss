@@ -1,1 +1,67 @@
 /* pages/home/home.wxss */
+@import "/template/car-item/car-item.wxss";
+
+page {
+	background-color: #EBECEF;
+}
+
+.home-page-search-view {
+  width: 90%;
+  margin: 32rpx auto 64rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page-search-button {
+  flex: 1;
+  border: #E5E5E5 2rpx solid;
+  border-radius: 16rpx;
+  padding: 12rpx 16rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+	background-color: white;
+}
+
+.home-page-search-input {
+  font-size: 32rpx;
+  color: #696D76;
+  margin-left: 8rpx;
+  width: 70%;
+}
+
+.home-page-search-text {
+  font-size: 32rpx;
+  color: #32cdff;
+  margin-left: 32rpx;
+}
+
+.home-page-search-placeholder {
+  font-size: 32rpx;
+  color: #babdc3;
+}
+
+
+.home-add-button {
+	position: fixed;
+	bottom: 32rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 96rpx;
+	width: 96rpx;
+	border-radius: 96rpx;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+}
+
+.home-add-button text {
+	font-size: 84rpx;
+	color: #FF6D4A;
+	line-height: 96rpx;
+	margin-bottom: 8rpx;
+}

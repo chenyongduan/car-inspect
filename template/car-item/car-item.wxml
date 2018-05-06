@@ -1,0 +1,15 @@
+
+<template name='car-item'>
+	<view class='car-item'>
+		<image src='/images/car.jpg'>
+			<view>{{car_number}}</view>
+		</image>
+		<view class='content-view'>
+			<text>{{user_name}}</text>
+			<text>{{check_at}}</text>
+		</view>
+		<view class='surplus-day'>
+			<text>29<text>天</text></text>
+		</view>
+	</view>
+</template>

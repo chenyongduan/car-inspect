@@ -1,6 +1,8 @@
 const { HOST } = require('../constants/index');
 const { wxPromise } = require('./util.js');
 
+const app = getApp();
+
 function request(apiInfo, header) {
   const { endpoint, method, data } = apiInfo;
 	return wxPromise(wx.request, {
@@ -39,6 +41,7 @@ function wxRequest(apiInfo) {
   const defaultHeaders = {
     Accept: 'application/json',
     'content-Type': 'application/json',
+		token: app.getToken(),
   };
   return request(apiInfo, defaultHeaders);
 }

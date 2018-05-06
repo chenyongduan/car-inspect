@@ -1,2 +1,17 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<import src="/template/car-item/car-item.wxml" />
+
+<view class='home-page'>
+	<view class='home-page-search-view' catchtap='bindSearchViewCatch'>
+		<view class='home-page-search-button'>
+			<icon type="search" size='20' />
+			<input class='home-page-search-input' value='{{inputValue}}' bindinput="bindSearchInput" bindfocus="bindSearchForcus" bindconfirm="bindConfirmEvent" placeholder='请输入评价类型' placeholder-class='home-page-search-placeholder' />
+		</view>
+		<view class='home-page-search-text' bindtap='onSearchClick'>搜索</view>
+	</view>
+	<block wx:for="{{carList}}" wx:key="{{index}}">
+		<template is="car-item" data="{{...item}}" />
+	</block>
+
+	<view class='home-add-button'><text>+</text></view>
+</view>

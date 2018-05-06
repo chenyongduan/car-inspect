@@ -1,4 +1,4 @@
-
+// 注册和登录
 function login(adminName, password) {
 	return {
 		endpoint: '/users/login',

@@ -1,7 +1,8 @@
 {
   "pages": [
-		"pages/home/home",
-		"pages/authenticate/authenticate"
+    "pages/home/home",
+    "pages/authenticate/authenticate",
+    "pages/home/car-page/car-page"
   ],
   "window": {
     "backgroundTextStyle": "light",

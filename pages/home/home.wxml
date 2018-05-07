@@ -13,5 +13,5 @@
 		<template is="car-item" data="{{...item}}" />
 	</block>
 
-	<view class='home-add-button'><text>+</text></view>
+	<view class='home-add-button' bindtap='onAddCarClick'><text>+</text></view>
 </view>

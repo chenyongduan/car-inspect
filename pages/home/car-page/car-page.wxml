@@ -1,0 +1,11 @@
+<!--pages/home/car-page/car-page.wxml-->
+	<view class="login-section">
+		<input
+			id="adminName"
+			maxlength="11"
+			placeholder="请输入昵称"
+			bindinput="inputValueChange"
+			value="{{adminName}}"
+			placeholder-style="color: rgba(0, 0, 0, 0.2);"
+		/>
+	</view>

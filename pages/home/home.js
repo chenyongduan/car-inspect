@@ -19,4 +19,9 @@ Page({
 			}
 		});
   },
+	onAddCarClick: function () {
+		wx.navigateTo({
+			url: '/pages/home/car-page/car-page',
+		});
+	},
 })

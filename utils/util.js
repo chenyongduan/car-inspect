@@ -1,6 +1,8 @@
 const regs = {
 	adminName: /^[\d\w]{1,}$/,
 	password: /^[\d\w_-]{3,}$/,
+	carNumber: /^[\d\w_-]{5,}$/,
+	phone: /^1\d{10}$/,
 };
 
 /*

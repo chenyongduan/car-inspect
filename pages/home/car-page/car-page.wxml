@@ -1,11 +1,47 @@
 <!--pages/home/car-page/car-page.wxml-->
-	<view class="login-section">
-		<input
-			id="adminName"
-			maxlength="11"
-			placeholder="请输入昵称"
-			bindinput="inputValueChange"
-			value="{{adminName}}"
-			placeholder-style="color: rgba(0, 0, 0, 0.2);"
-		/>
-	</view>
+<view class="section-view">
+	<text>车主</text>
+	<input
+		id="userName"
+		maxlength="20"
+		placeholder="请输入车主姓名"
+		bindinput="inputValueChange"
+		value="{{userName}}"
+		placeholder-style="color: rgba(0, 0, 0, 0.4);"
+	/>
+</view>
+<view class="section-view">
+	<text>车牌号</text>
+	<input
+		id="carNumber"
+		maxlength="10"
+		placeholder="请输入车牌号"
+		bindinput="inputValueChange"
+		value="{{carNumber}}"
+		placeholder-style="color: rgba(0, 0, 0, 0.4);"
+	/>
+</view>
+<view class="section-view">
+	<text>手机号</text>
+	<input
+		id="phone"
+		maxlength="11"
+		placeholder="请输入手机号"
+		bindinput="inputValueChange"
+		value="{{phone}}"
+		type='number'
+		placeholder-style="color: rgba(0, 0, 0, 0.4);"
+	/>
+</view>
+<view class="section-view">
+	<text>车检日期</text>
+	<picker mode="date" value="{{checkDay}}" start="2005-09-01" bindchange="bindDateChange">
+		<view class="check-text {{checkDay !== '' ? '' : 'check-text-empty'}}">{{checkDay || '请选择车检日期'}}</view>
+	</picker>
+</view>
+<view class='image-section-view'>
+	<view class='image-title'>图片</view>
+	<view>+</view>
+</view>
+
+<button class='save-button' bindtap='onSavePress'>保存</button>

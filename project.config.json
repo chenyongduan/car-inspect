@@ -30,12 +30,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
 					"name": "car-page",
-					"pathName": "pages/home/car-page/car-page"
+					"pathName": "pages/home/car-page/car-page",
+					"query": ""
 				}
 			]
 		}

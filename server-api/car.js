@@ -6,6 +6,20 @@ function fetchCars(adminName, password) {
 	};
 }
 
+function addCar(userName, carNumber, phone, checkAt) {
+	return {
+		endpoint: '/car',
+		method: 'POST',
+		data: {
+			userName,
+			carNumber,
+			phone,
+			checkAt,
+		},
+	};
+}
+
 module.exports = {
 	fetchCars,
+	addCar,
 };

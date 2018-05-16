@@ -1,1 +1,69 @@
 /* pages/home/car-page/car-page.wxss */
+
+.section-view {
+  padding-top: 32rpx;
+  width: 80%;
+  border-bottom: #eee 2rpx solid;
+	margin: 0 auto;
+}
+
+.section-view > text {
+  font-size: 28rpx;
+  color: #cdd0d7;
+  display: block;
+}
+
+.section-view > input {
+  margin: 16rpx 0;
+  font-size: 28rpx;
+  color: #696d76;
+}
+
+.check-text {
+	margin: 16rpx 0;
+  font-size: 28rpx;
+  color: #696d76;
+  display: block;
+}
+
+.check-text-empty {
+	color: rgba(0, 0, 0, 0.4);
+}
+
+.image-section-view {
+	padding-top: 32rpx;
+  width: 80%;
+	margin: 0 auto;
+}
+
+.image-title {
+	font-size: 28rpx;
+  color: #cdd0d7;
+}
+
+.image-section-view view:last-child {
+	border: #E7E8EA 4rpx solid;
+	height: 300rpx;
+	width: 300rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 16rpx;
+	font-size: 80rpx;
+	color: #E7E8EA;
+	margin-top: 32rpx;
+}
+
+.save-button {
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 50rpx;
+	width: 80%;
+	background: #FFC250;
+	color: #ffffff;
+	position: absolute;
+	bottom: 40rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	border: none;
+}

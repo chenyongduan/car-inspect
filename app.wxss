@@ -25,12 +25,6 @@ view, text {
   box-sizing: border-box;
 } 
 
-.section-title {
-  font-size: 40rpx;
-  color: #696D76;
-  padding: 16rpx 0;
-}
-
 .normal-text {
   font-size: 36rpx;
   color: #8A8F9B;

@@ -2,6 +2,7 @@
 const { valid, wxPromise } = require('../../utils/util');
 const { wxRequest } = require('../../utils/wx-request');
 const { fetchCars } = require('../../server-api/car');
+const moment = require('../../libs/moment.js');
 
 Page({
   data: {
@@ -14,8 +15,12 @@ Page({
 		wxRequest(fetchCars()).then((result) => {
 			wx.hideLoading();
 			if (!result.errorMsg) {
-				console.warn(result.response.data)
-				this.setData({ carList: result.response.data });
+				const carList = [];
+				result.response.map((value) => {
+					value.checkAt = moment.unix(value.checkAt).format('YYYY-MM-DD');
+					carList.push(value);
+				});
+				this.setData({ carList });
 			}
 		});
   },

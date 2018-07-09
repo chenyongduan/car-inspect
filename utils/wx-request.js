@@ -13,7 +13,13 @@ function request(apiInfo, header) {
 	}).then((res) => {
 		const result = {};
 		const { statusCode, data } = res;
-		const { message, response } = data;
+		const { message, response, code } = data;
+		if (code === 401) {
+			console.warn('====')
+			wx.reLaunch({
+				url: '/pages/authenticate/authenticate',
+			});
+		}
 		if (statusCode === 200 || statusCode === 201) {
 			if (message) {
 				result.errorMsg = message;

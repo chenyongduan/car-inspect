@@ -16,6 +16,10 @@ view, text {
   position: relative;
 }
 
+button {
+	border: none;
+}
+
 .container {
   height: 100%;
   display: flex;

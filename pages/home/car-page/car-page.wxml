@@ -41,7 +41,12 @@
 </view>
 <view class='image-section-view'>
 	<view class='image-title'>图片</view>
-	<view>+</view>
+	<view class='image-content-view'>
+		<block wx:for='{{imagePath}}' wx:key='{{index}}'>
+			<image src='{{item}}' />
+		</block>
+		<view bindtap='addImageClick'>+</view>
+	</view>
 </view>
 
 <button class='save-button' bindtap='onSavePress'>保存</button>

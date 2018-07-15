@@ -2,6 +2,7 @@
 const { valid } = require('../../../utils/util');
 const { wxRequest } = require('../../../utils/wx-request');
 const { addCar } = require('../../../server-api/car');
+const moment = require('../../../libs/moment.js');
 
 const ERROR_MSG = {
 	userName: '请输入车主姓名',
@@ -16,6 +17,7 @@ Page({
 		carNumber: '',
 		phone: '',
 		checkDay: '',
+		imagePath: [],
   },
 	inputValueChange: function (e) {
 		const id = e.target.id;
@@ -40,10 +42,10 @@ Page({
 			this.showTips(ERROR_MSG['userName']);
 			return;
 		}
-		if (!valid(carNumber, 'carNumber')) {
-			this.showTips(ERROR_MSG['carNumber']);
-			return;
-		}
+		// if (!valid(carNumber, 'carNumber')) {
+		// 	this.showTips(ERROR_MSG['carNumber']);
+		// 	return;
+		// }
 		if (phone !== '' && !valid(phone, 'phone')) {
 			this.showTips(ERROR_MSG['phone']);
 			return;
@@ -55,13 +57,30 @@ Page({
 		wx.showLoading({
 			title: '正在保存中',
 		});
-		wxRequest(addCar(userName, carNumber, phone, checkDay)).then((result) => {
+		const checkDayStamp = moment(checkDay).unix();
+		wxRequest(addCar(userName, carNumber, phone, checkDayStamp)).then((result) => {
 			wx.hideLoading();
-			if (result.errorMsg) {
+			if (result.errorMsg) {	
 				this.showTips(result.errorMsg);
 			} else {
-				this.showTips('保存成功');
+				wx.navigateBack();
+				wx.showToast({
+					title: '添加成功',
+				});
 			}
 		});
+	},
+	addImageClick: function () {
+		wx.chooseImage({
+			count: 9,
+			sizeType: ['original', 'compressed'],
+			sourceType: ['album', 'camera'],
+			success: (res) => {
+				var tempFilePaths = res.tempFilePaths;
+				const { imagePath } = this.data;
+				const curImagePath = imagePath.concat(tempFilePaths);
+				this.setData({ imagePath: curImagePath });
+			}
+		})
 	},
 });

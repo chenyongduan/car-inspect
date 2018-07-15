@@ -12,6 +12,9 @@ App({
 			{ key: 'token' },
 		).then((res) => {
 			this.setToken(res.data);
+			wx.reLaunch({
+				url: '/pages/home/home',
+			});
 		}).catch(() => {
 			wx.reLaunch({
 				url: '/pages/authenticate/authenticate',

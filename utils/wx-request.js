@@ -15,14 +15,14 @@ function request(apiInfo, header) {
 		const { statusCode, data } = res;
 		const { message, response, code } = data;
 		if (code === 401) {
-			console.warn('====')
+			console.warn('=========401')
 			wx.reLaunch({
 				url: '/pages/authenticate/authenticate',
 			});
 		}
 		if (statusCode === 200 || statusCode === 201) {
 			if (message) {
-				result.errorMsg = message;
+				result.message = message;
 			} else {
 				result.response = response;
 			}

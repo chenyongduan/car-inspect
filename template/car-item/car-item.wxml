@@ -5,11 +5,11 @@
 			<view>{{carNumber}}</view>
 		</image>
 		<view class='content-view'>
-			<text>{{userName}}</text>
-			<text>{{checkAt}}</text>
+			<text bindtap='onPhoneCall' data-phone='{{phone}}'>{{userName}}</text>
+			<text>年检：{{checkAt}}</text>
 		</view>
 		<view class='surplus-day'>
-			<text>29<text>天</text></text>
+			<text style='color: {{surplusColor}};'>{{surplusDay}}<text>天</text></text>
 		</view>
 	</view>
 </template>

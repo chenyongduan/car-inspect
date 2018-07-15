@@ -18,6 +18,9 @@ Page({
 				const carList = [];
 				result.response.map((value) => {
 					value.checkAt = moment.unix(value.checkAt).format('YYYY-MM-DD');
+					const surplusDay = moment().diff(moment(value.checkAt), 'days');
+					value.surplusDay = surplusDay;
+					value.surplusColor = surplusDay <= 15 ? '#FF0000' : '#4A4A4A';
 					carList.push(value);
 				});
 				this.setData({ carList });
@@ -28,5 +31,9 @@ Page({
 		wx.navigateTo({
 			url: '/pages/home/car-page/car-page',
 		});
+	},
+	onPhoneCall: function (evt) {
+		const { phone } = evt.currentTarget.dataset;
+		wx.makePhoneCall({ phoneNumber: phone	});
 	},
 })

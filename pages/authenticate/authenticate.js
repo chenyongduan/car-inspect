@@ -73,6 +73,7 @@ Page({
 					url: '/pages/home/home',
 				});
 			} else {
+				wx.hideLoading();
 				wx.showModal({
 					content: errorMsg,
 					showCancel: false

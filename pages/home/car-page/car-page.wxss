@@ -41,10 +41,23 @@
   color: #cdd0d7;
 }
 
-.image-section-view view:last-child {
+.image-content-view {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.image-content-view image {
+	height: 300rpx;
+	width: 45%;
+	margin-top: 32rpx;
+	margin-right: 5%;
+}
+
+.image-content-view view:last-child {
 	border: #E7E8EA 4rpx solid;
 	height: 300rpx;
-	width: 300rpx;
+	width: 45%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -52,6 +65,7 @@
 	font-size: 80rpx;
 	color: #E7E8EA;
 	margin-top: 32rpx;
+	margin-right: 5%;
 }
 
 .save-button {
@@ -61,9 +75,7 @@
 	width: 80%;
 	background: #FFC250;
 	color: #ffffff;
-	position: absolute;
-	bottom: 40rpx;
-	left: 50%;
-	transform: translateX(-50%);
 	border: none;
+	margin-top: 96rpx;
+	margin-bottom: 40rpx;
 }

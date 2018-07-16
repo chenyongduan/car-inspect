@@ -17,8 +17,14 @@ view, text {
 }
 
 button {
-	border: none;
+  border: none;
 }
+
+button::after {
+  border: none;
+  border-radius: 0;
+}
+
 
 .container {
   height: 100%;

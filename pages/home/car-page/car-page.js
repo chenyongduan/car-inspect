@@ -1,16 +1,8 @@
 // pages/home/car-page/car-page.js
-const {
-  valid
-} = require('../../../utils/util');
-const {
-  wxRequest
-} = require('../../../utils/wx-request');
-const {
-  addCar
-} = require('../../../server-api/car');
-const {
-  HOST
-} = require('../../../constants/index.js');
+const { valid } = require('../../../utils/util');
+const { wxRequest } = require('../../../utils/wx-request');
+const { addCar } = require('../../../server-api/car');
+const { HOST } = require('../../../constants/index.js');
 const moment = require('../../../libs/moment.js');
 
 const app = getApp();
@@ -28,6 +20,7 @@ Page({
     carNumber: '',
     phone: '',
     checkDay: '',
+    checkPrice: 0,
     imagePath: [],
   },
   inputValueChange: function(e) {
@@ -56,7 +49,8 @@ Page({
       userName,
       carNumber,
       phone,
-      checkDay
+      checkDay,
+      checkPrice,
     } = this.data;
     if (userName === '') {
       this.showTips(ERROR_MSG['userName']);
@@ -78,7 +72,7 @@ Page({
       title: '正在保存中',
     });
     const checkDayStamp = moment(checkDay).unix();
-    wxRequest(addCar(userName, carNumber, phone, checkDayStamp)).then((result) => {
+    wxRequest(addCar(userName, carNumber, phone, checkDayStamp, checkPrice)).then((result) => {
       wx.hideLoading();
       if (result.message) {
         this.showTips(result.message);

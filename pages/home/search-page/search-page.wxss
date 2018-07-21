@@ -1,0 +1,50 @@
+/* pages/home/search-page/search-page.wxss */
+@import "/template/car-item/car-item.wxss";
+
+page {
+	background-color: #EBECEF;
+}
+
+.search-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-view {
+  width: 90%;
+  margin: 32rpx auto 64rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-button {
+  flex: 1;
+  border: #E5E5E5 2rpx solid;
+  border-radius: 16rpx;
+  padding: 12rpx 16rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+	background-color: white;
+}
+
+.search-input {
+  font-size: 32rpx;
+  color: #696D76;
+  margin-left: 8rpx;
+  width: 80%;
+}
+
+.search-text {
+  font-size: 32rpx;
+  color: #32cdff;
+  margin-left: 32rpx;
+}
+
+.search-placeholder {
+  font-size: 32rpx;
+  color: #babdc3;
+}

@@ -28,22 +28,11 @@ page {
 
 .home-page-search-input {
   font-size: 32rpx;
-  color: #696D76;
+  color: #babdc3;
   margin-left: 8rpx;
   width: 70%;
+  padding-left: 16rpx;
 }
-
-.home-page-search-text {
-  font-size: 32rpx;
-  color: #32cdff;
-  margin-left: 32rpx;
-}
-
-.home-page-search-placeholder {
-  font-size: 32rpx;
-  color: #babdc3;
-}
-
 
 .home-add-button {
 	position: fixed;

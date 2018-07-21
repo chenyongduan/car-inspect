@@ -1,0 +1,23 @@
+<!--pages/home/search-page/search-page.wxml-->
+<import src="/template/car-item/car-item.wxml" />
+
+<view class='search-page'>
+  <view class='search-view' catchtap='bindSearchViewCatch'>
+    <view class='search-button'>
+      <icon type="search" size='20' />
+      <input
+        class='search-input'
+        value='{{searchValue}}'
+        bindinput="bindSearchInput"
+        bindconfirm="onSearchClick"
+        placeholder='请输入车牌号或者车主'
+        placeholder-class='search-placeholder'
+      />
+    </view>
+    <view class='search-text' bindtap='onSearchClick'>搜索</view>
+  </view>
+  
+  <block wx:for="{{carList}}" wx:key="{{index}}">
+    <template is="car-item" data="{{...item}}" />
+  </block>
+</view>

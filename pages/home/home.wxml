@@ -5,9 +5,10 @@
 	<view class='home-page-search-view' catchtap='bindSearchViewCatch'>
 		<view class='home-page-search-button'>
 			<icon type="search" size='20' />
-			<input class='home-page-search-input' value='{{inputValue}}' bindinput="bindSearchInput" bindfocus="bindSearchForcus" bindconfirm="bindConfirmEvent" placeholder='请输入评价类型' placeholder-class='home-page-search-placeholder' />
+			<view class='home-page-search-input' bindtap='onSearchClick' >
+        搜索
+      </view>
 		</view>
-		<view class='home-page-search-text' bindtap='onSearchClick'>搜索</view>
 	</view>
 	<block wx:for="{{carList}}" wx:key="{{index}}">
 		<template is="car-item" data="{{...item}}" />

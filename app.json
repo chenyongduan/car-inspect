@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/authenticate/authenticate",
-		"pages/home/home",
-    "pages/home/car-page/car-page"
+    "pages/home/home",
+    "pages/home/car-page/car-page",
+    "pages/home/search-page/search-page"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -40,12 +40,13 @@
 .content-view > text:first-child {
 	font-size: 44rpx;
 	color: #4A4A4A;
+  margin-top: 0;
 }
 
-.content-view > text:last-child {
+.content-view > text {
 	font-size: 28rpx;
 	color: #4A4A4A;
-	margin-top: 40rpx;
+	margin-top: 20rpx;
 }
 
 .surplus-day {

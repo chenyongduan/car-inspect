@@ -39,6 +39,18 @@
 		<view class="check-text {{checkDay !== '' ? '' : 'check-text-empty'}}">{{checkDay || '请选择车检日期'}}</view>
 	</picker>
 </view>
+<view class="section-view">
+	<text>车检费</text>
+	<input
+		id="checkPrice"
+		maxlength="11"
+		placeholder="请输入车检费"
+		bindinput="inputValueChange"
+		value="{{checkPrice}}"
+		type='number'
+		placeholder-style="color: rgba(0, 0, 0, 0.4);"
+	/>
+</view>
 <view class='image-section-view'>
 	<view class='image-title'>图片</view>
 	<view class='image-content-view'>

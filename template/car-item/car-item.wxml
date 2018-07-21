@@ -6,6 +6,7 @@
 		</image>
 		<view class='content-view'>
 			<text bindtap='onPhoneCall' data-phone='{{phone}}'>{{userName}}</text>
+      <text>费用：￥{{checkPrice}}</text>
 			<text>年检：{{checkAt}}</text>
 		</view>
 		<view class='surplus-day'>

@@ -6,7 +6,7 @@ function fetchCars(adminName, password) {
 	};
 }
 
-function addCar(userName, carNumber, phone, checkAt) {
+function addCar(userName, carNumber, phone, checkAt, checkPrice) {
 	return {
 		endpoint: '/car',
 		method: 'POST',
@@ -15,11 +15,24 @@ function addCar(userName, carNumber, phone, checkAt) {
 			carNumber,
 			phone,
 			checkAt,
+      checkPrice,
 		},
 	};
+}
+
+function searchCar(searchValue) {
+  console.warn('searchValue', searchValue)
+  return {
+    endpoint: '/searchCar',
+    method: 'POST',
+    data: {
+      searchValue,
+    },
+  };
 }
 
 module.exports = {
 	fetchCars,
 	addCar,
+  searchCar,
 };

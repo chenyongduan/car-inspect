@@ -1,5 +1,4 @@
 // pages/home/home.js
-const { valid, wxPromise } = require('../../utils/util');
 const { wxRequest } = require('../../utils/wx-request');
 const { fetchCars } = require('../../server-api/car');
 const moment = require('../../libs/moment.js');
@@ -9,7 +8,6 @@ Page({
 		carList: [],
   },
   onLoad: function (options) {
-    console.warn('======== home')
 		wx.showLoading({
 			title: '正在加载',
 		});
@@ -40,4 +38,9 @@ Page({
 		const { phone } = evt.currentTarget.dataset;
 		wx.makePhoneCall({ phoneNumber: phone	});
 	},
+  onSearchClick: function () {
+    wx.navigateTo({
+      url: '/pages/home/search-page/search-page',
+    });
+  },
 })

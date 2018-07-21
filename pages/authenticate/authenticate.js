@@ -54,8 +54,8 @@ Page({
 			mask: true,
 		});
 		wxRequest(login(adminName, password)).then((result) => {
-			const { response, errorMsg } = result;
-			if (!errorMsg) {
+      const { response, message } = result;
+      if (!message) {
 				wx.setStorage({
 					key: 'token',
 					data: response,
@@ -69,13 +69,13 @@ Page({
 					title: '登录成功',
 					mask: true,
 				});
-				wx.reLaunch({
+				wx.redirectTo({
 					url: '/pages/home/home',
 				});
 			} else {
 				wx.hideLoading();
 				wx.showModal({
-					content: errorMsg,
+          content: message,
 					showCancel: false
 				});
 			}

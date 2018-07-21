@@ -12,13 +12,13 @@ App({
 			{ key: 'token' },
 		).then((res) => {
 			this.setToken(res.data);
-			wx.reLaunch({
+      wx.reLaunch({
 				url: '/pages/home/home',
 			});
 		}).catch(() => {
-			wx.reLaunch({
-				url: '/pages/authenticate/authenticate',
-			});
+			// wx.reLaunch({
+			// 	url: '/pages/authenticate/authenticate',
+			// });
 		});
   },
 	setToken: function (token) {

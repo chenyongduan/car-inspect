@@ -15,7 +15,6 @@ function request(apiInfo, header) {
 		const { statusCode, data } = res;
 		const { message, response, code } = data;
 		if (code === 401) {
-			console.warn('=========401')
 			wx.reLaunch({
 				url: '/pages/authenticate/authenticate',
 			});
@@ -27,12 +26,12 @@ function request(apiInfo, header) {
 				result.response = response;
 			}
 		} else {
-			result.errorMsg = `网络异常，错误代码${res.statusCode}`;
+      result.message = `网络异常，错误代码${res.statusCode}`;
 		}
 		return Promise.resolve(result);
 	}).catch((res) => {
 		const result = {
-			errorMsg: '未知服务器错误，请重试',
+      message: '未知服务器错误，请重试',
 		};
 		return Promise.resolve(result);
 	});
@@ -42,13 +41,20 @@ function wxRequest(apiInfo) {
   const {
     endpoint,
     method,
+    isRequireAuth,
     data,
   } = apiInfo;
+  let isRequireAuthTmp = isRequireAuth;
+  if (typeof isRequireAuthTmp === 'undefined') {
+    isRequireAuthTmp = true;
+  }
   const defaultHeaders = {
     Accept: 'application/json',
     'content-Type': 'application/json',
-		token: app.getToken(),
   };
+  if (isRequireAuthTmp) {
+    defaultHeaders.token = app.getToken();
+  }
   return request(apiInfo, defaultHeaders);
 }
 

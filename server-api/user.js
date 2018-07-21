@@ -3,6 +3,7 @@ function login(adminName, password) {
 	return {
 		endpoint: '/users/login',
 		method: 'POST',
+    isRequireAuth: false,
 		data: {
 			adminName,
 			password,

@@ -9,12 +9,13 @@ Page({
 		carList: [],
   },
   onLoad: function (options) {
+    console.warn('======== home')
 		wx.showLoading({
 			title: '正在加载',
 		});
 		wxRequest(fetchCars()).then((result) => {
 			wx.hideLoading();
-			if (!result.errorMsg) {
+      if (!result.message) {
 				const carList = [];
 				result.response.map((value) => {
 					value.checkAt = moment.unix(value.checkAt).format('YYYY-MM-DD');
@@ -26,6 +27,9 @@ Page({
 				this.setData({ carList });
 			}
 		});
+  },
+  onUnload: function () {
+    console.warn('home unload')
   },
 	onAddCarClick: function () {
 		wx.navigateTo({

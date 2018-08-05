@@ -2,10 +2,11 @@
 <import src="/template/car-item/car-item.wxml" />
 
 <view class='search-page'>
-  <view class='search-view' catchtap='bindSearchViewCatch'>
+  <view class='search-view'>
     <view class='search-button'>
       <icon type="search" size='20' />
       <input
+        focus
         class='search-input'
         value='{{searchValue}}'
         bindinput="bindSearchInput"
@@ -20,4 +21,8 @@
   <block wx:for="{{carList}}" wx:key="{{index}}">
     <template is="car-item" data="{{...item}}" />
   </block>
+
+  <view wx:if ='{{carList.length === 0}}' class='empty-view'>
+   未搜索到相关内容
+  </view>
 </view>

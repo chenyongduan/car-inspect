@@ -16,12 +16,29 @@ const ERROR_MSG = {
 
 Page({
   data: {
+    id: null,
     userName: '',
-    carNumber: '',
+    carNumber: '闽D',
     phone: '',
     checkDay: '',
     checkPrice: 0,
     imagePath: [],
+  },
+  onLoad: function () {
+    const curCarInfo = app.getCarInfo();
+    if (!curCarInfo) return;
+    const { id, userName, phone, carNumber, checkAt, checkPrice } = curCarInfo;
+    this.setData({
+      id,
+      userName,
+      phone,
+      carNumber,
+      checkDay: checkAt,
+      checkPrice,
+    });
+  },
+  onUnload: function () {
+    app.setCarInfo(null);
   },
   inputValueChange: function(e) {
     const id = e.target.id;
@@ -85,38 +102,45 @@ Page({
     });
   },
   addImageClick: function() {
+    if (!this.id) {
+      wx.showModal({
+        title: '提示',
+        content: '请先保存信息，再上传图片！',
+        showCancel: false,
+      });
+      return;
+    }
     wx.chooseImage({
-      count: 9,
+      count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        // var tempFilePaths = res.tempFilePaths;
-        // const { imagePath } = this.data;
-        // const curImagePath = imagePath.concat(tempFilePaths);
-        // this.setData({ imagePath: curImagePath });
-        var tempFilePaths = res.tempFilePaths
-        wx.uploadFile({
-          url: `${HOST}/uploadImage`,
-          filePath: tempFilePaths[0],
-          name: 'image',
-          header: {
-            'token': app.getToken(),
-          },
-          formData: {
-            'carId': '1'
-          },
-          success: (res) => {
-            var dataStr = res.data
-            //do something
-            const data = JSON.parse(dataStr);
-            if (data.response) {
-              const { imagePath } = this.data;
-              const curImagePath = imagePath.concat(tempFilePaths);
-              this.setData({ imagePath: curImagePath });
-            }
-          }
-        })
+        this.uploadImage(res.tempFilePaths);
       }
     })
+  },
+  uploadImage: function (tempFilePaths) {
+    const { id } = this.data;
+    wx.uploadFile({
+      url: `${HOST}/uploadImage`,
+      filePath: tempFilePaths[0],
+      name: 'image',
+      header: {
+        'token': app.getToken(),
+      },
+      formData: {
+        'carId': id,
+      },
+      success: (res) => {
+        var dataStr = res.data
+        //do something
+        const data = JSON.parse(dataStr);
+        if (data.response) {
+          const { imagePath } = this.data;
+          const curImagePath = imagePath.concat(tempFilePaths);
+          this.setData({ imagePath: curImagePath });
+        }
+      }
+    });
   },
 });

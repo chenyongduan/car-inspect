@@ -2,10 +2,10 @@
 <import src="/template/car-item/car-item.wxml" />
 
 <view class='home-page'>
-	<view class='home-page-search-view' catchtap='bindSearchViewCatch'>
+	<view class='home-page-search-view' bindtap='onSearchClick'>
 		<view class='home-page-search-button'>
 			<icon type="search" size='20' />
-			<view class='home-page-search-input' bindtap='onSearchClick' >
+			<view class='home-page-search-input' >
         搜索
       </view>
 		</view>

@@ -1,6 +1,6 @@
 
 <template name='car-item'>
-	<view class='car-item'>
+	<view class='car-item' bindtap='onCarItemClick' data-id='{{id}}'>
 		<image src='/images/car.jpg'>
 			<view>{{carNumber}}</view>
 		</image>

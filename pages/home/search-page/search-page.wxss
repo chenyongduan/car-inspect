@@ -2,11 +2,14 @@
 @import "/template/car-item/car-item.wxss";
 
 page {
-	background-color: #EBECEF;
+  display: flex;
+  flex: 1;
+  background-color: #ebecef;
 }
 
 .search-page {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -21,19 +24,19 @@ page {
 
 .search-button {
   flex: 1;
-  border: #E5E5E5 2rpx solid;
+  border: #e5e5e5 2rpx solid;
   border-radius: 16rpx;
   padding: 12rpx 16rpx;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-	background-color: white;
+  background-color: white;
 }
 
 .search-input {
   font-size: 32rpx;
-  color: #696D76;
+  color: #696d76;
   margin-left: 8rpx;
   width: 80%;
 }
@@ -47,4 +50,12 @@ page {
 .search-placeholder {
   font-size: 32rpx;
   color: #babdc3;
+}
+
+.empty-view {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  color: #696d76;
 }

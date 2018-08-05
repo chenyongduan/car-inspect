@@ -2,6 +2,9 @@
 const { wxRequest } = require('../../utils/wx-request');
 const { fetchCars } = require('../../server-api/car');
 const moment = require('../../libs/moment.js');
+const _ = require('../../libs/lodash.js');
+
+const app = getApp();
 
 Page({
   data: {
@@ -41,6 +44,15 @@ Page({
   onSearchClick: function () {
     wx.navigateTo({
       url: '/pages/home/search-page/search-page',
+    });
+  },
+  onCarItemClick: function (evt) {
+    const { carList } = this.data;
+    const { id } = evt.currentTarget.dataset;
+    const curCarInfo = _.find(carList, { id });
+    app.setCarInfo(curCarInfo);
+    wx.navigateTo({
+      url: '/pages/home/car-page/car-page',
     });
   },
 })

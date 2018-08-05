@@ -2,6 +2,9 @@
 @import "/template/car-item/car-item.wxss";
 
 page {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 	background-color: #EBECEF;
 }
 

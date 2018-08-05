@@ -41,4 +41,10 @@ App({
 			pageCallback(param);
 		}
 	},
+  setCarInfo: function (carInfo) {
+    this.carInfo = carInfo;
+  },
+  getCarInfo: function () {
+    return this.carInfo;
+  },
 })

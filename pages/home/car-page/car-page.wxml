@@ -51,7 +51,7 @@
 		placeholder-style="color: rgba(0, 0, 0, 0.4);"
 	/>
 </view>
-<view class='image-section-view'>
+<view wx:if='{{!!id}}' class='image-section-view'>
 	<view class='image-title'>图片</view>
 	<view class='image-content-view'>
 		<block wx:for='{{imagePath}}' wx:key='{{index}}'>
@@ -61,4 +61,4 @@
 	</view>
 </view>
 
-<button class='save-button' bindtap='onSavePress'>保存</button>
+<button class='save-button' bindtap='onSavePress'>{{!!id ? '修改' : '保存'}}</button>

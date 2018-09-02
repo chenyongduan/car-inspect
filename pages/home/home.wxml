@@ -2,17 +2,23 @@
 <import src="/template/car-item/car-item.wxml" />
 
 <view class='home-page'>
-	<view class='home-page-search-view' bindtap='onSearchClick'>
-		<view class='home-page-search-button'>
-			<icon type="search" size='20' />
-			<view class='home-page-search-input' >
+  <view class='home-page-search-view' bindtap='onSearchClick'>
+    <view class='home-page-search-button'>
+      <icon type="search" size='20' />
+      <view class='home-page-search-input'>
         搜索
       </view>
-		</view>
-	</view>
-	<block wx:for="{{carList}}" wx:key="{{index}}">
-		<template is="car-item" data="{{...item}}" />
-	</block>
+    </view>
+  </view>
 
-	<view class='home-add-button' bindtap='onAddCarClick'><text>+</text></view>
+  <scroll-view class='home-page-scroll-view' scroll-y>
+    <view class='home-page-scroll-padding' />
+    <block wx:for="{{carList}}" wx:key="{{index}}">
+      <template is="car-item" data="{{...item}}" />
+    </block>
+  </scroll-view>
+
+  <view class='home-add-button' bindtap='onAddCarClick'>
+    <text>+</text>
+  </view>
 </view>

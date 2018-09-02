@@ -14,22 +14,7 @@ const homePage = {
 		carList: [],
   },
   onLoad: function (options) {
-		wx.showLoading({
-			title: '正在加载',
-		});
-		wxRequest(fetchCars()).then((result) => {
-			wx.hideLoading();
-      if (!result.message) {
-				const carList = [];
-				result.response.map((value) => {
-          const newCarInfo = this.dealCar(value);
-          const carInfo = Object.assign(value, newCarInfo);
-          carList.push(carInfo);
-				});
-				this.setData({ carList });
-			}
-		});
-
+    this.fetchData();
     app.setPageCallback('homeAddCar', this.addCar);
     app.setPageCallback('homeUpdateCar', this.updateCar);
     app.setPageCallback('homeUpdateCarImages', this.updateCarImages);
@@ -39,6 +24,23 @@ const homePage = {
     app.removePageCallback('homeAddCar');
     app.removePageCallback('homeUpdateCar');
     app.removePageCallback('homeUpdateCarImages');
+  },
+  fetchData: function () {
+    wx.showLoading({
+      title: '正在加载',
+    });
+    wxRequest(fetchCars()).then((result) => {
+      wx.hideLoading();
+      if (!result.message) {
+        const carList = [];
+        result.response.map((value) => {
+          const newCarInfo = this.dealCar(value);
+          const carInfo = Object.assign(value, newCarInfo);
+          carList.push(carInfo);
+        });
+        this.setData({ carList });
+      }
+    });
   },
 	onAddCarClick: function () {
 		wx.navigateTo({

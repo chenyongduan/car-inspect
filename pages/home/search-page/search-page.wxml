@@ -18,9 +18,16 @@
     <view class='search-text' bindtap='onSearchClick'>搜索</view>
   </view>
   
-  <block wx:for="{{carList}}" wx:key="{{index}}">
-    <template is="car-item" data="{{...item}}" />
-  </block>
+  <scroll-view
+    wx:if ='{{carList.length > 0}}'
+    class='search-page-scroll-view'
+    scroll-y
+  >
+    <view class='search-page-scroll-padding' />
+    <block wx:for="{{carList}}" wx:key="{{index}}">
+      <template is="car-item" data="{{...item}}" />
+    </block>
+  </scroll-view>
 
   <view wx:if ='{{carList.length === 0}}' class='empty-view'>
    未搜索到相关内容

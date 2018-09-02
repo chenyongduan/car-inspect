@@ -13,6 +13,8 @@
 	position: relative;
 	height: 210rpx;
 	width: 192rpx;
+  border-top-left-radius: 16rpx;
+  border-bottom-left-radius: 16rpx;
 }
 
 .car-item > image view {
@@ -27,6 +29,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+  border-bottom-left-radius: 16rpx;
 }
 
 .content-view {

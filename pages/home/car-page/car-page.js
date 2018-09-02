@@ -104,12 +104,15 @@ Page({
     const checkDayStamp = moment(checkDay).unix();
     wxRequest(addCar(userName, carNumber, phone, checkDayStamp, checkPrice)).then((result) => {
       wx.hideLoading();
-      if (result.message) {
+      const { message, response } = result;
+      if (message) {
         this.showTips(result.message);
       } else {
+        app.executePageCallback('homeAddCar', response);
         wx.showToast({
           title: '添加成功',
         });
+        this.setData({ id: response.id });
       }
     });
   },
@@ -139,6 +142,8 @@ Page({
       if (result.message) {
         this.showTips(result.message);
       } else {
+        app.executePageCallback('homeUpdateCar', result.response);
+        app.executePageCallback('searchUpdateCar', result.response);
         wx.showToast({
           title: '修改成功',
         });
@@ -153,7 +158,7 @@ Page({
       success: (res) => {
         this.uploadImage(res.tempFilePaths);
       }
-    })
+    });
   },
   uploadImage: function (tempFilePaths) {
     const { id } = this.data;
@@ -169,6 +174,8 @@ Page({
           const { imagePath } = this.data;
           const curImagePath = imagePath.concat(data.response);
           this.setData({ imagePath: curImagePath });
+          app.executePageCallback('homeUpdateCarImages', { id, images: curImagePath});
+          app.executePageCallback('searchUpdateCarImages', { id, images: curImagePath });
         } else if (data.message) {
           wx.showToast({
             title: data.message,
@@ -220,7 +227,9 @@ Page({
           modalImagePath: '',
           imagePath,
         });
+        app.executePageCallback('homeUpdateCarImages', { id, images: imagePath });
+        app.executePageCallback('searchUpdateCarImages', { id, images: imagePath });
       }
     });
-  }
+  },
 });

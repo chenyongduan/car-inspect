@@ -1,15 +1,25 @@
 // pages/home/search-page/search-page.js
-const { wxRequest } = require('../../../utils/wx-request');
-const { searchCar } = require('../../../server-api/car');
 const moment = require('../../../libs/moment.js');
 const _ = require('../../../libs/lodash.js');
+const { extend } = require('../../../utils/util.js');
+const { wxRequest } = require('../../../utils/wx-request');
+const { searchCar } = require('../../../server-api/car');
+const dealCar = require('../common/deal-car.js');
 
 const app = getApp();
 
-Page({
+const searchPage = {
   data: {
     searchValue: '',
     carList: [],
+  },
+  onLoad: function () {
+    app.setPageCallback('searchUpdateCar', this.updateCar);
+    app.setPageCallback('searchUpdateCarImages', this.updateCarImages);
+  },
+  onUnload: function () {
+    app.removePageCallback('searchUpdateCar');
+    app.removePageCallback('searchUpdateCarImages');
   },
   bindSearchInput: function (e) {
     const value = e.detail.value;
@@ -31,11 +41,9 @@ Page({
       if (!result.message) {
         const carList = [];
         result.response.map((value) => {
-          value.checkAt = moment.unix(value.checkAt).format('YYYY-MM-DD');
-          const surplusDay = moment().diff(moment(value.checkAt), 'days');
-          value.surplusDay = surplusDay;
-          value.surplusColor = surplusDay <= 15 ? '#FF0000' : '#4A4A4A';
-          carList.push(value);
+          const newCarInfo = this.dealCar(value);
+          const carInfo = Object.assign(value, newCarInfo);
+          carList.push(carInfo);
         });
         this.setData({ carList });
       }
@@ -50,4 +58,6 @@ Page({
       url: '/pages/home/car-page/car-page',
     });
   },
-})
+};
+
+Page(extend(searchPage, dealCar));

@@ -49,6 +49,7 @@ page {
 	display: flex;
 	justify-content: center;
 	align-items: center; 
+  box-shadow: 0rpx 0rpx 40rpx 5rpx rgba(0, 0, 0, 0.2);
 }
 
 .home-add-button text {

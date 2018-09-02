@@ -35,8 +35,15 @@
 </view>
 <view class="section-view">
 	<text>车检日期</text>
-	<picker mode="date" value="{{checkDay}}" start="2005-09-01" bindchange="bindDateChange">
-		<view class="check-text {{checkDay !== '' ? '' : 'check-text-empty'}}">{{checkDay || '请选择车检日期'}}</view>
+	<picker
+    mode="date"
+    value="{{checkDay}}"
+    start="{{startCheckDate}}"
+    bindchange="bindDateChange"
+  >
+		<view
+      class="check-text {{checkDay !== '' ? '' : 'check-text-empty'}}"
+    >{{checkDay || '请选择车检日期'}}</view>
 	</picker>
 </view>
 <view class="section-view">

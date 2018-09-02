@@ -4,7 +4,14 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: 280rpx 140rpx 0;
+	padding: 160rpx 140rpx 0;
+}
+
+.logo-text {
+  font-size: 64rpx;
+  color: #282B31;
+  text-align: center;
+  margin-bottom: 128rpx;
 }
 
 .login-section {

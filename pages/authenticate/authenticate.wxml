@@ -1,5 +1,6 @@
 <!--pages/authenticate/authenticate.wxml-->
 <view class="authenticate-base">
+  <text class='logo-text'>车检记录</text>
 	<view class="login-section">
 		<input
 			id="adminName"

@@ -18,6 +18,7 @@ const ERROR_MSG = {
 
 Page({
   data: {
+    startCheckDate: moment().format('YYYY-MM-DD'),
     id: null,
     userName: '',
     carNumber: '闽D',
@@ -209,6 +210,17 @@ Page({
     });
   },
   onDeleteClick: function () {
+    wx.showModal({
+      title: '提示',
+      content: '确定删除该图片？',
+      success: (res) => {
+        if (res.confirm) {
+          this.onDeleteImage();
+        }
+      },
+    });
+  },
+  onDeleteImage: function () {
     const { id, modalImagePath, imagePath } = this.data;
     wx.showLoading({
       title: '正在删除图片',

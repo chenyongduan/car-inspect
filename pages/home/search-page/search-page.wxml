@@ -1,5 +1,6 @@
 <!--pages/home/search-page/search-page.wxml-->
 <import src="/template/car-item/car-item.wxml" />
+<import src="/template/network-error-page/network-error-page.wxml" />
 
 <view class='search-page'>
   <view class='search-view'>
@@ -19,7 +20,7 @@
   </view>
   
   <scroll-view
-    wx:if ='{{carList.length > 0}}'
+    wx:if ='{{!netError && carList.length > 0}}'
     class='search-page-scroll-view'
     scroll-y
   >
@@ -29,7 +30,8 @@
     </block>
   </scroll-view>
 
-  <view wx:if ='{{carList.length === 0}}' class='empty-view'>
+  <view wx:if ='{{!netError && carList.length === 0}}' class='empty-view'>
    未搜索到相关内容
   </view>
+  <template wx:if='{{netError}}' is='network-error-page' />
 </view>

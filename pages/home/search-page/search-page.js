@@ -12,6 +12,7 @@ const searchPage = {
   data: {
     searchValue: '',
     carList: [],
+    netError: false,
   },
   onLoad: function () {
     app.setPageCallback('searchUpdateCar', this.updateCar);
@@ -25,6 +26,27 @@ const searchPage = {
     const value = e.detail.value;
     this.setData({ searchValue: value });
   },
+  searchCar: function (searchValue) {
+    wx.showLoading({
+      title: '正在搜索中',
+    });
+    wxRequest(searchCar(searchValue)).then((result) => {
+      wx.hideLoading();
+      let netError = true;
+      this.searchValue = searchValue;
+      if (!result.message) {
+        const carList = [];
+        result.response.map((value) => {
+          const newCarInfo = this.dealCar(value);
+          const carInfo = Object.assign(value, newCarInfo);
+          carList.push(carInfo);
+        });
+        netError = false;
+        this.setData({ carList });
+      }
+      this.setData({ netError });
+    });
+  },
   onSearchClick: function () {
     const { searchValue } = this.data;
     if (searchValue === '') {
@@ -33,21 +55,7 @@ const searchPage = {
       });
       return;
     }
-    wx.showLoading({
-      title: '正在搜索中',
-    });
-    wxRequest(searchCar(searchValue)).then((result) => {
-      wx.hideLoading();
-      if (!result.message) {
-        const carList = [];
-        result.response.map((value) => {
-          const newCarInfo = this.dealCar(value);
-          const carInfo = Object.assign(value, newCarInfo);
-          carList.push(carInfo);
-        });
-        this.setData({ carList });
-      }
-    })
+    this.searchCar(searchValue);
   },
   onCarItemClick: function (evt) {
     const { carList } = this.data;
@@ -57,6 +65,9 @@ const searchPage = {
     wx.navigateTo({
       url: '/pages/home/car-page/car-page',
     });
+  },
+  onNetworkRetryHandler: function () {
+    this.searchCar(this.searchValue);
   },
 };
 

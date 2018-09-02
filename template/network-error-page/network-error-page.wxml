@@ -1,0 +1,13 @@
+<template name="network-error-page">
+  <view
+    class="network-error-page"
+    style="{{style}}"
+    bindtap='onNetworkRetryHandler'
+    data-type='{{type}}'
+  >
+    <text
+      class="network-error-page-text"
+      data-type='{{type}}'
+    >{{title || '网络异常，点击重试'}}</text>
+  </view>
+</template>

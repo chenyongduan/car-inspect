@@ -1,5 +1,6 @@
 <!--pages/home/home.wxml-->
 <import src="/template/car-item/car-item.wxml" />
+<import src="/template/network-error-page/network-error-page.wxml" />
 
 <view class='home-page'>
   <view class='home-page-search-view' bindtap='onSearchClick'>
@@ -11,14 +12,16 @@
     </view>
   </view>
 
-  <scroll-view class='home-page-scroll-view' scroll-y>
+  <scroll-view wx:if='{{!netError}}' class='home-page-scroll-view' scroll-y>
     <view class='home-page-scroll-padding' />
     <block wx:for="{{carList}}" wx:key="{{index}}">
       <template is="car-item" data="{{...item}}" />
     </block>
   </scroll-view>
 
-  <view class='home-add-button' bindtap='onAddCarClick'>
+  <view wx:if='{{!netError}}' class='home-add-button' bindtap='onAddCarClick'>
     <text>+</text>
   </view>
+
+  <template wx:if='{{netError}}' is='network-error-page' />
 </view>

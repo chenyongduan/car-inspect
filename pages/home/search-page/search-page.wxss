@@ -1,5 +1,6 @@
 /* pages/home/search-page/search-page.wxss */
 @import "/template/car-item/car-item.wxss";
+@import "/template/network-error-page/network-error-page.wxss";
 
 page {
   background-color: #ebecef;

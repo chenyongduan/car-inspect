@@ -12,6 +12,7 @@ const app = getApp();
 const homePage = {
   data: {
 		carList: [],
+    netError: false,
   },
   onLoad: function (options) {
     this.fetchData();
@@ -31,6 +32,7 @@ const homePage = {
     });
     wxRequest(fetchCars()).then((result) => {
       wx.hideLoading();
+      let netError = true;
       if (!result.message) {
         const carList = [];
         result.response.map((value) => {
@@ -38,8 +40,10 @@ const homePage = {
           const carInfo = Object.assign(value, newCarInfo);
           carList.push(carInfo);
         });
+        netError = false;
         this.setData({ carList });
       }
+      this.setData({ netError });
     });
   },
 	onAddCarClick: function () {
@@ -64,6 +68,9 @@ const homePage = {
     wx.navigateTo({
       url: '/pages/home/car-page/car-page',
     });
+  },
+  onNetworkRetryHandler: function () {
+    this.fetchData();
   },
 };
 

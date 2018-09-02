@@ -1,0 +1,22 @@
+.network-error-page {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 128rpx;
+}
+
+.network-error-page-image {
+  width: 272rpx;
+  height: 168rpx;
+  margin-bottom: 32rpx;
+}
+
+.network-error-page-text {
+  color: #8A8F9B;
+  font-size: 32rpx;
+}

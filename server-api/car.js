@@ -20,8 +20,21 @@ function addCar(userName, carNumber, phone, checkAt, checkPrice) {
 	};
 }
 
+function updateCar(carId, userName, carNumber, phone, checkAt, checkPrice) {
+  return {
+    endpoint: `/updateCar/${carId}`,
+    method: 'POST',
+    data: {
+      userName,
+      carNumber,
+      phone,
+      checkAt,
+      checkPrice,
+    },
+  };
+}
+
 function searchCar(searchValue) {
-  console.warn('searchValue', searchValue)
   return {
     endpoint: '/searchCar',
     method: 'POST',
@@ -34,5 +47,6 @@ function searchCar(searchValue) {
 module.exports = {
 	fetchCars,
 	addCar,
+  updateCar,
   searchCar,
 };

@@ -3,6 +3,7 @@ const { wxRequest } = require('../../utils/wx-request');
 const { fetchCars } = require('../../server-api/car');
 const moment = require('../../libs/moment.js');
 const _ = require('../../libs/lodash.js');
+const { HOST } = require('../../constants/index.js');
 
 const app = getApp();
 
@@ -20,9 +21,10 @@ Page({
 				const carList = [];
 				result.response.map((value) => {
 					value.checkAt = moment.unix(value.checkAt).format('YYYY-MM-DD');
-					const surplusDay = moment().diff(moment(value.checkAt), 'days');
+          const surplusDay = moment(value.checkAt).diff(moment(), 'days');
 					value.surplusDay = surplusDay;
 					value.surplusColor = surplusDay <= 15 ? '#FF0000' : '#4A4A4A';
+          value.image = this.getImage(value.images);
 					carList.push(value);
 				});
 				this.setData({ carList });
@@ -31,6 +33,11 @@ Page({
   },
   onUnload: function () {
     console.warn('home unload')
+  },
+  getImage: function (images) {
+    const defalutImg = '/images/car.jpg';
+    if (!images || !images[0]) return defalutImg;
+    return `${HOST}/${images[0]}`;
   },
 	onAddCarClick: function () {
 		wx.navigateTo({

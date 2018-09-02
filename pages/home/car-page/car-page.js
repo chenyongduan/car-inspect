@@ -1,9 +1,11 @@
 // pages/home/car-page/car-page.js
 const { valid } = require('../../../utils/util');
 const { wxRequest } = require('../../../utils/wx-request');
-const { addCar } = require('../../../server-api/car');
+const { addCar, updateCar } = require('../../../server-api/car');
+const { deleteImage } = require('../../../server-api/image.js');
 const { HOST } = require('../../../constants/index.js');
 const moment = require('../../../libs/moment.js');
+const { remove } = require('../../../libs/lodash.js');
 
 const app = getApp();
 
@@ -23,11 +25,16 @@ Page({
     checkDay: '',
     checkPrice: 0,
     imagePath: [],
+    HOST,
+    showImagePage: false,
+    modalImagePath: '',
+    imageWidth: 0,
+    imageHeight: 0,
   },
   onLoad: function () {
     const curCarInfo = app.getCarInfo();
     if (!curCarInfo) return;
-    const { id, userName, phone, carNumber, checkAt, checkPrice } = curCarInfo;
+    const { id, userName, phone, carNumber, checkAt, checkPrice, images } = curCarInfo;
     this.setData({
       id,
       userName,
@@ -35,6 +42,7 @@ Page({
       carNumber,
       checkDay: checkAt,
       checkPrice,
+      imagePath: images,
     });
   },
   onUnload: function () {
@@ -63,12 +71,17 @@ Page({
   },
   onSavePress: function() {
     const {
+      id,
       userName,
       carNumber,
       phone,
       checkDay,
       checkPrice,
     } = this.data;
+    if (!!id) {
+      this.onChangeCarPress();
+      return;
+    }
     if (userName === '') {
       this.showTips(ERROR_MSG['userName']);
       return;
@@ -94,22 +107,45 @@ Page({
       if (result.message) {
         this.showTips(result.message);
       } else {
-        wx.navigateBack();
         wx.showToast({
           title: '添加成功',
         });
       }
     });
   },
-  addImageClick: function() {
-    if (!this.id) {
-      wx.showModal({
-        title: '提示',
-        content: '请先保存信息，再上传图片！',
-        showCancel: false,
-      });
+  onChangeCarPress: function () {
+    const {
+      id,
+      userName,
+      phone,
+      carNumber,
+      checkDay,
+      checkPrice,
+    } = this.data;
+    if (userName === '') {
+      this.showTips(ERROR_MSG['userName']);
       return;
     }
+    if (phone !== '' && !valid(phone, 'phone')) {
+      this.showTips(ERROR_MSG['phone']);
+      return;
+    }
+    wx.showLoading({
+      title: '正在修改中',
+    });
+    const checkDayStamp = moment(checkDay).unix();
+    wxRequest(updateCar(id, userName, carNumber, phone, checkDayStamp, checkPrice)).then((result) => {
+      wx.hideLoading();
+      if (result.message) {
+        this.showTips(result.message);
+      } else {
+        wx.showToast({
+          title: '修改成功',
+        });
+      }
+    });
+  },
+  addImageClick: function() {
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -125,22 +161,66 @@ Page({
       url: `${HOST}/uploadImage`,
       filePath: tempFilePaths[0],
       name: 'image',
-      header: {
-        'token': app.getToken(),
-      },
-      formData: {
-        'carId': id,
-      },
+      header: { token: app.getToken() },
+      formData: { carId: id },
       success: (res) => {
-        var dataStr = res.data
-        //do something
-        const data = JSON.parse(dataStr);
+        const data = JSON.parse(res.data);
         if (data.response) {
           const { imagePath } = this.data;
-          const curImagePath = imagePath.concat(tempFilePaths);
+          const curImagePath = imagePath.concat(data.response);
           this.setData({ imagePath: curImagePath });
+        } else if (data.message) {
+          wx.showToast({
+            title: data.message,
+            icon: 'none',
+          });
         }
+      },
+      fail: (error) => {
+        console.warn(error)
       }
     });
   },
+  onImageClick: function (evt) {
+    const { imagepath } = evt.currentTarget.dataset;
+    this.setData({
+      showImagePage: true,
+      modalImagePath: imagepath,
+    });
+  },
+  bindImageLoad: function (evt) {
+    const { width, height } = evt.detail;
+    this.setData({
+      imageWidth: width,
+      imageHeight: height,
+    });
+  },
+  onImagePageClick: function () {
+    this.setData({
+      showImagePage: false,
+      modalImagePath: '',
+    });
+  },
+  onDeleteClick: function () {
+    const { id, modalImagePath, imagePath } = this.data;
+    wx.showLoading({
+      title: '正在删除图片',
+    });
+    wxRequest(deleteImage(id, modalImagePath)).then((result) => {
+      wx.hideLoading();
+      if (result.message) {
+        this.showTips(result.message);
+      } else {
+        wx.showToast({
+          title: '删除成功',
+        });
+        remove(imagePath, (image) => image === modalImagePath);
+        this.setData({
+          showImagePage: false,
+          modalImagePath: '',
+          imagePath,
+        });
+      }
+    });
+  }
 });

@@ -1,0 +1,12 @@
+<view wx:if='{{showImagePage}}' class='image-page' bindtap='onImagePageClick'>
+  <image
+    src='{{HOST}}/{{modalImagePath}}'
+    style='width: {{imageWidth * 2}}rpx; height: {{imageHeight}}rpx;'
+    mode='widthFix'
+    bindload='bindImageLoad'
+  />
+  <button
+    catchtap='onDeleteClick'
+    type='warn'
+  >删除</button>
+</view>

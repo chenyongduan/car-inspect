@@ -13,7 +13,6 @@ Page({
   },
   bindSearchInput: function (e) {
     const value = e.detail.value;
-    console.warn(value)
     this.setData({ searchValue: value });
   },
   onSearchClick: function () {

@@ -1,4 +1,5 @@
 /* pages/home/car-page/car-page.wxss */
+@import '/pages/home/image-page/image-page.wxss';
 
 .section-view {
   padding-top: 32rpx;
@@ -50,6 +51,7 @@
 .image-content-view image {
 	height: 300rpx;
 	width: 45%;
+	border-radius: 16rpx;
 	margin-top: 32rpx;
 	margin-right: 5%;
 }

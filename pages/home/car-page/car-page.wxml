@@ -55,10 +55,17 @@
 	<view class='image-title'>图片</view>
 	<view class='image-content-view'>
 		<block wx:for='{{imagePath}}' wx:key='{{index}}'>
-			<image src='{{item}}' />
+			<image
+        bindtap='onImageClick
+        src='{{HOST}}/{{item}}'
+        mode='aspectFill'
+        data-imagePath='{{item}}'
+      />
 		</block>
 		<view bindtap='addImageClick'>+</view>
 	</view>
 </view>
 
 <button class='save-button' bindtap='onSavePress'>{{!!id ? '修改' : '保存'}}</button>
+
+<include src='/pages/home/image-page/image-page.wxml' />

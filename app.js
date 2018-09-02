@@ -16,9 +16,9 @@ App({
 				url: '/pages/home/home',
 			});
 		}).catch(() => {
-			// wx.reLaunch({
-			// 	url: '/pages/authenticate/authenticate',
-			// });
+			wx.reLaunch({
+				url: '/pages/authenticate/authenticate',
+			});
 		});
   },
 	setToken: function (token) {

@@ -43,7 +43,10 @@ module.exports = {
     const carIndex = _.findIndex(carList, { id });
     if (carIndex < 0) return null;
     carList[carIndex].images = images;
-    carList[carIndex].imagePreview = this.getImage(images);
-    this.setData({ carList });
+    const imagePreview = this.getImage(images);
+    if (carList[carIndex].imagePreview !== imagePreview) {
+      carList[carIndex].imagePreview = imagePreview;
+      this.setData({ carList });
+    }
   },
 }

@@ -1,6 +1,8 @@
 const moment = require('../../../libs/moment.js');
 const _ = require('../../../libs/lodash.js');
-const { HOST } = require('../../../constants/index.js');
+const {
+  HOST
+} = require('../../../constants/index.js');
 
 module.exports = {
   getImage: function(images) {
@@ -19,46 +21,31 @@ module.exports = {
     return newCarInfo;
   },
   addCar: function(carInfo) {
-    let {
-      carList
-    } = this.data;
+    let { carList } = this.data;
     let newCarInfo = this.dealCar(carInfo);
     newCarInfo = Object.assign(carInfo, newCarInfo);
     carList = _.concat([], newCarInfo, carList);
-    this.setData({
-      carList
-    });
+    this.setData({ carList });
   },
   updateCar: function(newCarInfo) {
-    const {
-      id
-    } = newCarInfo;
-    const {
-      carList
-    } = this.data;
-    const carIndex = _.findIndex(carList, {
-      id
-    });
+    const { id } = newCarInfo;
+    const { carList } = this.data;
+    const carIndex = _.findIndex(carList, { id });
     if (carIndex < 0) return null;
     const dealCarInfo = this.dealCar(newCarInfo);
     const curCarInfo = Object.assign(carList[carIndex], newCarInfo, dealCarInfo);
     carList[carIndex] = curCarInfo;
-    this.setData({
-      carList
-    });
+    this.setData({ carList });
   },
   updateCarImages: function(refreshInfo) {
-    const {
-      id,
-      images
-    } = refreshInfo;
-    const {
-      carList
-    } = this.data;
-    const carIndex = _.findIndex(carList, {
-      id
-    });
+    const { id, images } = refreshInfo;
+    const { carList } = this.data;
+    const carIndex = _.findIndex(carList, { id });
     if (carIndex < 0) return null;
     carList[carIndex].images = images;
+    if (images.length === 1) {
+      carList[carIndex].imagePreview = this.getImage(images);
+      this.setData({ carList });
+    }
   },
 }

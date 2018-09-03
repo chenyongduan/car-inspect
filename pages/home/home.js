@@ -14,6 +14,7 @@ const homePage = {
 		carList: [],
     netError: false,
     showFooterTips: false,
+    addButtonAnimation: '',
   },
   page: 1,
   pageSize: 5,
@@ -23,12 +24,60 @@ const homePage = {
     app.setPageCallback('homeAddCar', this.addCar);
     app.setPageCallback('homeUpdateCar', this.updateCar);
     app.setPageCallback('homeUpdateCarImages', this.updateCarImages);
+    this.initButtonAnimation();
   },
   onUnload: function () {
     console.warn('home unload');
     app.removePageCallback('homeAddCar');
     app.removePageCallback('homeUpdateCar');
     app.removePageCallback('homeUpdateCarImages');
+  },
+  initButtonAnimation: function () {
+    this.addButtonAnimation = wx.createAnimation({
+      duration: 600,
+      timingFunction: "ease",
+    });
+  },
+  showAddButton: function () {
+    this.addButtonAnimation.translateX('-50%').translateY(0).step();
+    this.setData({ addButtonAnimation: this.addButtonAnimation.export() });
+  },
+  hideAddButton: function () {
+    this.addButtonAnimation.translateX('-50%').translateY(200).step();
+    this.setData({ addButtonAnimation: this.addButtonAnimation.export() });
+  },
+  onScrollEvent: function (event) {
+    const { deltaY, scrollTop, scrollHeight } = event.detail;
+    if (scrollTop < 0) {
+      return;
+    }
+    if (deltaY < 0 && Math.abs(deltaY) > 5) {
+      if (this.addButtonShowFlag) {
+        this.addButtonShowFlag = false;
+        this.hideAddButton();
+      }
+      return;
+    }
+    if (deltaY >= 0 && !this.addButtonShowFlag) {
+      this.addButtonShowFlag = true;
+      this.showAddButton();
+    }
+  },
+  onTouchStart: function () {
+    this.clearaddButtonHandle();
+  },
+  onTouchEnd: function () {
+    if (this.addButtonShowFlag) return;
+    this.clearaddButtonHandle();
+    this.addButtonHandle = setTimeout(() => {
+      this.addButtonShowFlag = true;
+      this.showAddButton();
+    }, 2000);
+  },
+  clearaddButtonHandle: function () {
+    if (!this.addButtonHandle) return;
+    clearTimeout(this.addButtonHandle);
+    this.addButtonHandle = null;
   },
   fetchData: function () {
     wx.showLoading({
@@ -41,6 +90,7 @@ const homePage = {
       if (response) {
         netError = false;
         this.dealCarsResult(response);
+        this.showAddButton();
       }
       this.setData({ netError });
     });
@@ -64,7 +114,7 @@ const homePage = {
     this.page = page;
     this.pageSize = pageSize;
     this.total = total;
-    const curCount = page * pageSize;
+    const curCount = carList.length;
     const showFooterTips = curCount >= total && curCount >= 4;
     this.setData({ carList, showFooterTips });
   },

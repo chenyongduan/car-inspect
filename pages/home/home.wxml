@@ -17,6 +17,9 @@
     class='home-page-scroll-view'
     scroll-y
     bindscrolltolower='bindScrollToLower'
+    bindscroll="onScrollEvent"
+    bindtouchstart='onTouchStart'
+    bindtouchend='onTouchEnd'
   >
     <view class='home-page-scroll-padding' />
     <block wx:for="{{carList}}" wx:key="{{index}}">
@@ -27,7 +30,12 @@
     </view>
   </scroll-view>
 
-  <view wx:if='{{!netError}}' class='home-add-button' bindtap='onAddCarClick'>
+  <view
+    wx:if='{{!netError}}'
+    class='home-add-button'
+    bindtap='onAddCarClick'
+    animation='{{addButtonAnimation}}'
+  >
     <text>+</text>
   </view>
 

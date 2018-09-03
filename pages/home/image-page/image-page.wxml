@@ -1,4 +1,4 @@
-<view wx:if='{{showImagePage}}' class='image-page' bindtap='onImagePageClick'>
+<view wx:if='{{showImagePage}}' class='image-page' bindtap='onImagePageClick' catchtouchmove='onImagePageCatch'>
   <image
     src='{{HOST}}/{{modalImagePath}}'
     style='width: {{imageWidth * 2}}rpx; height: {{imageHeight}}rpx;'

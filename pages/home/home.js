@@ -13,7 +13,11 @@ const homePage = {
   data: {
 		carList: [],
     netError: false,
+    showFooterTips: false,
   },
+  page: 1,
+  pageSize: 5,
+  total: 0,
   onLoad: function (options) {
     this.fetchData();
     app.setPageCallback('homeAddCar', this.addCar);
@@ -30,21 +34,39 @@ const homePage = {
     wx.showLoading({
       title: '正在加载',
     });
-    wxRequest(fetchCars()).then((result) => {
+    wxRequest(fetchCars(this.page, this.pageSize)).then((res) => {
+      const { message, response } = res;
       wx.hideLoading();
       let netError = true;
-      if (!result.message) {
-        const carList = [];
-        result.response.map((value) => {
-          const newCarInfo = this.dealCar(value);
-          const carInfo = Object.assign(value, newCarInfo);
-          carList.push(carInfo);
-        });
+      if (response) {
         netError = false;
-        this.setData({ carList });
+        this.dealCarsResult(response);
       }
       this.setData({ netError });
     });
+  },
+  fetchNextCars: function () {
+    if (this.page * this.pageSize >= this.total) return;
+    wxRequest(fetchCars(this.page + 1, this.pageSize)).then((res) => {
+      const { message, response } = res;
+      if (message) return;
+      this.dealCarsResult(response);
+    });
+  },
+  dealCarsResult: function (response) {
+    const { carList } = this.data;
+    const { result, page, pageSize, total } = response;
+    result.map((value) => {
+      const newCarInfo = this.dealCar(value);
+      const carInfo = Object.assign(value, newCarInfo);
+      carList.push(carInfo);
+    });
+    this.page = page;
+    this.pageSize = pageSize;
+    this.total = total;
+    const curCount = page * pageSize;
+    const showFooterTips = curCount >= total && curCount >= 4;
+    this.setData({ carList, showFooterTips });
   },
 	onAddCarClick: function () {
 		wx.navigateTo({
@@ -71,6 +93,9 @@ const homePage = {
   },
   onNetworkRetryHandler: function () {
     this.fetchData();
+  },
+  bindScrollToLower: function () {
+    this.fetchNextCars();
   },
 };
 

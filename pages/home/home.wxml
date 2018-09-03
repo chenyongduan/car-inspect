@@ -12,11 +12,19 @@
     </view>
   </view>
 
-  <scroll-view wx:if='{{!netError}}' class='home-page-scroll-view' scroll-y>
+  <scroll-view
+    wx:if='{{!netError}}'
+    class='home-page-scroll-view'
+    scroll-y
+    bindscrolltolower='bindScrollToLower'
+  >
     <view class='home-page-scroll-padding' />
     <block wx:for="{{carList}}" wx:key="{{index}}">
       <template is="car-item" data="{{...item}}" />
     </block>
+    <view wx:if='{{showFooterTips}}' class='home-page-scroll-footer'>
+    -------已经到底啦-------
+    </view>
   </scroll-view>
 
   <view wx:if='{{!netError}}' class='home-add-button' bindtap='onAddCarClick'>

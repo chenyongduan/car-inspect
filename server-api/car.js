@@ -1,7 +1,7 @@
 // 获取车检信息列表
-function fetchCars(adminName, password) {
+function fetchCars(page = 1, pageSize = 5) {
 	return {
-		endpoint: '/cars',
+    endpoint: `/cars?page=${page}&pageSize=${pageSize}`,
 		method: 'GET',
 	};
 }

@@ -29,6 +29,15 @@
   height: 32rpx;
 }
 
+.home-page-scroll-footer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 32rpx 0;
+}
+
 .home-page-search-button {
   flex: 1;
   border: #E5E5E5 2rpx solid;

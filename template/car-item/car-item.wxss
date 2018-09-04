@@ -65,6 +65,8 @@
   font-size: 44rpx;
 	color: #4A4A4A;
   margin-top: 0;
+  height: 55rpx;
+  overflow: hidden;
 }
 
 .phone-view > image {

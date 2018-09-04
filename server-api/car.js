@@ -44,9 +44,20 @@ function searchCar(searchValue) {
   };
 }
 
+function deleteCar(id) {
+  return {
+    endpoint: '/deleteCar',
+    method: 'POST',
+    data: {
+      id,
+    },
+  };
+}
+
 module.exports = {
 	fetchCars,
 	addCar,
   updateCar,
   searchCar,
+  deleteCar,
 };

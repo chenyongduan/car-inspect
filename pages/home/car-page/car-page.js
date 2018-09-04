@@ -1,7 +1,7 @@
 // pages/home/car-page/car-page.js
 const { valid } = require('../../../utils/util');
 const { wxRequest } = require('../../../utils/wx-request');
-const { addCar, updateCar } = require('../../../server-api/car');
+const { addCar, updateCar, deleteCar } = require('../../../server-api/car');
 const { deleteImage } = require('../../../server-api/image.js');
 const { HOST } = require('../../../constants/index.js');
 const moment = require('../../../libs/moment.js');
@@ -150,6 +150,33 @@ Page({
         });
       }
     });
+  },
+  deleteCarEvent: function () {
+    const { id } = this.data;
+    wx.showLoading({
+      title: '删除车辆中',
+    });
+    wxRequest(deleteCar(id)).then((res) => {
+      wx.hideLoading();
+      if (res.message) {
+        this.showTips(res.message);
+      } else {
+        app.executePageCallback('homeDeleteCar', res.response);
+        app.executePageCallback('searchDeleteCar', res.response);
+        wx.navigateBack();
+      }
+    });
+  },
+  onDeletePress: function () {
+    wx.showModal({
+      title: '提示',
+      content: '确定删除该车辆信息？',
+      success: (res) => {
+        if (res.confirm) {
+          this.deleteCarEvent();
+        }
+      },
+    })
   },
   addImageClick: function() {
     wx.chooseImage({

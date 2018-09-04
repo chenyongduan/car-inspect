@@ -53,7 +53,8 @@
 	width: 45%;
 	border-radius: 16rpx;
 	margin-top: 32rpx;
-	margin-right: 5%;
+	margin-right: 4.5%;
+  border: #E7E8EA 4rpx solid;
 }
 
 .image-content-view view:last-child {
@@ -67,7 +68,7 @@
 	font-size: 80rpx;
 	color: #E7E8EA;
 	margin-top: 32rpx;
-	margin-right: 5%;
+	margin-right: 4.5%;
 }
 
 .save-button {
@@ -79,5 +80,16 @@
 	color: #ffffff;
 	border: none;
 	margin-top: 96rpx;
+	margin-bottom: 40rpx;
+}
+
+.delete-button {
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 50rpx;
+	width: 80%;
+	background: #FF4876;
+	color: #ffffff;
+	border: none;
 	margin-bottom: 40rpx;
 }

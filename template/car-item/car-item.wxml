@@ -16,7 +16,7 @@
 		<view class='content-view'>
       <view class='phone-view' catchtap='onPhoneCall' data-phone='{{phone}}'>
         <text>{{userName}}</text>
-        <image src='/images/ic_call_phone.png' />
+        <image wx:if='{{phone}}' src='/images/ic_call_phone.png' />
       </view>
       <text>费用：￥{{checkPrice}}</text>
 			<text>年检：{{checkAt}}</text>

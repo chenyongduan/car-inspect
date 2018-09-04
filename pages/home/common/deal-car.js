@@ -27,6 +27,11 @@ module.exports = {
     carList = _.concat([], newCarInfo, carList);
     this.setData({ carList });
   },
+  deleteCar: function (carId) {
+    let { carList } = this.data;
+    _.remove(carList, (carInfo) => carInfo.id === carId);
+    this.setData({ carList });
+  },
   updateCar: function(newCarInfo) {
     const { id } = newCarInfo;
     const { carList } = this.data;

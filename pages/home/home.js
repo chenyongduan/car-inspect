@@ -22,6 +22,7 @@ const homePage = {
   onLoad: function (options) {
     this.fetchData();
     app.setPageCallback('homeAddCar', this.addCar);
+    app.setPageCallback('homeDeleteCar', this.deleteCar);
     app.setPageCallback('homeUpdateCar', this.updateCar);
     app.setPageCallback('homeUpdateCarImages', this.updateCarImages);
     this.initButtonAnimation();
@@ -29,6 +30,7 @@ const homePage = {
   onUnload: function () {
     console.warn('home unload');
     app.removePageCallback('homeAddCar');
+    app.removePageCallback('homeDeleteCar');
     app.removePageCallback('homeUpdateCar');
     app.removePageCallback('homeUpdateCarImages');
   },
@@ -125,6 +127,7 @@ const homePage = {
 	},
 	onPhoneCall: function (evt) {
 		const { phone } = evt.currentTarget.dataset;
+    if (!phone) return;
 		wx.makePhoneCall({ phoneNumber: phone	});
 	},
   onSearchClick: function () {

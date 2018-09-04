@@ -3,7 +3,7 @@
 	<text>车主</text>
 	<input
 		id="userName"
-		maxlength="20"
+		maxlength="6"
 		placeholder="请输入车主姓名"
 		bindinput="inputValueChange"
 		value="{{userName}}"
@@ -73,6 +73,8 @@
 	</view>
 </view>
 
-<button class='save-button' bindtap='onSavePress'>{{!!id ? '修改' : '保存'}}</button>
+<button class='save-button' bindtap='onSavePress'>{{!!id ? '修改' : '创建'}}</button>
+
+<button wx:if='{{!!id}}' class='delete-button' bindtap='onDeletePress'>删除</button>
 
 <include src='/pages/home/image-page/image-page.wxml' />

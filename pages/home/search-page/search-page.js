@@ -15,10 +15,12 @@ const searchPage = {
     netError: false,
   },
   onLoad: function () {
+    app.setPageCallback('homeDeleteCar', this.deleteCar);
     app.setPageCallback('searchUpdateCar', this.updateCar);
     app.setPageCallback('searchUpdateCarImages', this.updateCarImages);
   },
   onUnload: function () {
+    app.removePageCallback('homeDeleteCar');
     app.removePageCallback('searchUpdateCar');
     app.removePageCallback('searchUpdateCarImages');
   },
@@ -68,6 +70,11 @@ const searchPage = {
   },
   onNetworkRetryHandler: function () {
     this.searchCar(this.searchValue);
+  },
+  onPhoneCall: function (evt) {
+    const { phone } = evt.currentTarget.dataset;
+    if (!phone) return;
+    wx.makePhoneCall({ phoneNumber: phone });
   },
 };
 

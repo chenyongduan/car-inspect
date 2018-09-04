@@ -13,7 +13,7 @@
   </view>
 
   <scroll-view
-    wx:if='{{!netError}}'
+    wx:if='{{!netError && carList.length > 0}}'
     class='home-page-scroll-view'
     scroll-y
     bindscrolltolower='bindScrollToLower'
@@ -29,6 +29,13 @@
     -------已经到底啦-------
     </view>
   </scroll-view>
+
+  <view
+    wx:if='{{!netError && carList.length === 0}}'
+    class='home-page-empty'
+  >
+    <text>没有车辆信息\n请点击下方按钮添加</text>
+  </view>
 
   <view
     wx:if='{{!netError}}'

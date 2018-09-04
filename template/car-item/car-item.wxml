@@ -1,11 +1,23 @@
 
 <template name='car-item'>
 	<view class='car-item' bindtap='onCarItemClick' data-id='{{id}}'>
-		<image src='{{imagePreview}}' mode='aspectFill'>
+    <view wx:if='{{imagePreview === true}}' class='car-image-view'>
+      <image src='/images/ic_default_car.png' />
 			<view>{{carNumber}}</view>
-		</image>
+    </view>
+    <image
+      wx:if='{{imagePreview !== true}}'
+      class='car-image-view'
+      src='{{imagePreview}}'
+      mode='aspectFill'
+    >
+      <view>{{carNumber}}</view>
+    </image>
 		<view class='content-view'>
-			<text bindtap='onPhoneCall' data-phone='{{phone}}'>{{userName}}</text>
+      <view class='phone-view' catchtap='onPhoneCall' data-phone='{{phone}}'>
+        <text>{{userName}}</text>
+        <image src='/images/ic_call_phone.png' />
+      </view>
       <text>费用：￥{{checkPrice}}</text>
 			<text>年检：{{checkAt}}</text>
 		</view>

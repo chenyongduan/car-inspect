@@ -9,15 +9,25 @@
 	overflow: hidden;
 }
 
-.car-item > image {
+.car-image-view {
 	position: relative;
 	height: 210rpx;
 	width: 192rpx;
   border-top-left-radius: 16rpx;
   border-bottom-left-radius: 16rpx;
+  background-color: #bfbfbf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.car-item > image view {
+.car-image-view image {
+	height: 96rpx;
+	width: 146rpx;
+  margin-bottom: 32rpx;
+}
+
+.car-image-view view {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -40,17 +50,29 @@
 	flex: 1;
 }
 
-.content-view > text:first-child {
-	font-size: 44rpx;
-	color: #4A4A4A;
-  margin-top: 0;
-}
-
 .content-view > text {
 	font-size: 28rpx;
 	color: #4A4A4A;
 	margin-top: 20rpx;
 }
+
+.phone-view {
+  display: flex;
+  align-items: center;
+}
+
+.phone-view > text:first-child{
+  font-size: 44rpx;
+	color: #4A4A4A;
+  margin-top: 0;
+}
+
+.phone-view > image {
+  width: 48rpx;
+  height: 48rpx;
+  margin-left: 16rpx;
+}
+
 
 .surplus-day {
 	display: flex;

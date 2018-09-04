@@ -6,8 +6,8 @@ const {
 
 module.exports = {
   getImage: function(images) {
-    const defalutImg = '/images/car.jpg';
-    if (!images || !images[0]) return defalutImg;
+    const defalutImg = '/images/ic_default_car.png';
+    if (!images || !images[0]) return true;
     return `${HOST}/${images[0]}`;
   },
   dealCar: function(carInfo) {

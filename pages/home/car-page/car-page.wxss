@@ -53,7 +53,7 @@
 	width: 45%;
 	border-radius: 16rpx;
 	margin-top: 32rpx;
-	margin-right: 4.5%;
+	margin-right: 4%;
   border: #E7E8EA 4rpx solid;
 }
 
@@ -68,7 +68,7 @@
 	font-size: 80rpx;
 	color: #E7E8EA;
 	margin-top: 32rpx;
-	margin-right: 4.5%;
+	margin-right: 4%;
 }
 
 .save-button {

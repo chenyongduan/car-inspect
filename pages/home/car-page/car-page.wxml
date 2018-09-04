@@ -63,7 +63,7 @@
 	<view class='image-content-view'>
 		<block wx:for='{{imagePath}}' wx:key='{{index}}'>
 			<image
-        bindtap='onImageClick
+        catchtap='onImageClick'
         src='{{HOST}}/{{item}}'
         mode='aspectFill'
         data-imagePath='{{item}}'
